@@ -163,7 +163,9 @@ document.addEventListener('DOMContentLoaded', () => {
         "percent of households with income 150,000-199,999",
         "percent of households with income 200,000+"])
     //Creates the yScale
-    let y0 = d3.scaleOrdinal([domain[range[height]]])
+    let y0 = d3.scaleOrdinal()
+        .domain([0,10])
+        .range(range)
         
 
     //Defines the y axis styles
@@ -218,6 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .attr("class", "yaxis")
                  .call(yAxis)
      
+                 
                  let xAxisGroup = svg2.append("g")
                      .attr("class", "xaxis")
                      .call(xAxis)
@@ -229,8 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     .attr("class", "g-category-group")
                     .attr("transform", function (d) {
                         // debugger;
-                      
-                        return "translate(0," + y0(d["state"]) + ")";
+                        return "translate(0," + 10 + ")";
                     });
 
                 let bars2 = categoryGroup.append("rect")
@@ -245,7 +247,35 @@ document.addEventListener('DOMContentLoaded', () => {
                     .attr("class", "g-num")
                     .attr("transform", "translate(0,4)"); 
 
+                let labelGroup = svg.selectAll("g-num")
+                    .data(data)
+                    .enter()
+                    .append("g")
+                    .attr("class", "g-label-group")
+                    .attr("transform", function (d) {
+                        return "translate(0," + y0(d["State"]) + ")";
+                    });
 
+                let barLabels = labelGroup.append("text")
+                    .text(function (d) { return d["10,000-14,999"]+ "%"; })
+                    .attr("x", function (d) {
+                        if (minX > 32) {
+                            return xScale(d["75, 000 - 99, 999"]) - 37;
+                        }
+                        else {
+                            return xScale(d["percent of households with income 200,000+"]) + 6;
+                        }
+                    })
+                    .style("fill", function (d) {
+                        if (minX > 32) {
+                            return "white";
+                        }
+                        else {
+                            return "#696969";
+                        }
+                    })
+                    .attr("y",  4/ 1.6)
+                    .attr("class", "g-labels");   
             });
                 
                     
