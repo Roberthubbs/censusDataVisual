@@ -181,73 +181,73 @@ document.addEventListener('DOMContentLoaded', () => {
     .then((data) => {
         for (let i = 1; i < data.length; i++) {
             state = data[i][0]
-            data[i] = {
-                    "state" : state,
-                    "percent of households with income 10,000-14,999": data[i][1],
-                    "percent of households with income 15,000-24,999": data[i][2],
-                    "percent of households with income 25,000-34,999": data[i][3],
-                    "percent of households with income 35,000-49,999": data[i][4],
-                    "percent of households with income 50,000-74,999": data[i][5],
-                    "percent of households with income 75,000-99,999": data[i][6],
-                    "percent of households with income 100,000-149,999": data[i][7],
-                    "percent of households with income 150,000-199,999": data[i][8],
-                    "percent of households with income 200,000+": data[i][9],
-                }
-            
+            data[i] = [
+                    {"category":"state", "information": state},
+                    {"category":"percent of households with income 10,000-14,999", "information":data[i][1]},
+                    {"category":"percent of households with income 15,000-24,999", "information":data[i][2]},
+                    {"category":"percent of households with income 25,000-34,999", "information":data[i][3]},
+                    {"category":"percent of households with income 35,000-49,999", "information":data[i][4]},
+                    {"category":"percent of households with income 50,000-74,999", "information":data[i][5]},
+                    {"category":"percent of households with income 75,000-99,999", "information":data[i][6]},
+                    {"category":"percent of households with income 100,000-149,999", "information":data[i][7]},
+                    {"category":"percent of households with income 150,000-199,999", "information":data[i][8]},
+                    {"category":"percent of households with income 200,000+", "information":data[i][9]},
+            ]
+            // debugger;
         }
         return data;
     }).then((data) => {
-        let d;
+        
             
             data = data.slice(1)
-            d = {};
-            data.forEach((d) => {
-                d["state"] = d["state"];
-                d["10,000-14,999"] = parseFloat(d["percent of households with income 10,000-14,999"]);
-                d["15,000-24,999"] = parseFloat(d["percent of households with income 15,000-24,999"]);
-                d["25,000-34,999"] = parseFloat(d["percent of households with income 25,000-34,999"]);
-                d["35,000-49,999"] = parseFloat(d["percent of households with income 35,000-49,999"]);
-                d["50,000-74,999"] = parseFloat(d["percent of households with income 50,000-74,999"]);
-                d["75,000-99,999"] = parseFloat(d["percent of households with income 75,000-99,999"]);
-                d["100,000-149,999"] = parseFloat(d["percent of households with income 100,000-149,999"]);
-                d["150,000-199,999"] = parseFloat(d["percent of households with income 150,000-199,999"]);
-                d["200,000+"] = parseFloat(d["percent of households with income 200,000+"]);
-                let maxX = d3.max(data, function(d) { return d["10,000-14,999"]});             
-                
-                let minX = d3.max(data, function(d) { return d["200,000+"]});
+           
+            // data.forEach((d) => {
+            //     d["state"] = d["state"];
+            //     d["10,000-14,999"] = parseFloat(d["percent of households with income 10,000-14,999"]);
+            //     d["15,000-24,999"] = parseFloat(d["percent of households with income 15,000-24,999"]);
+            //     d["25,000-34,999"] = parseFloat(d["percent of households with income 25,000-34,999"]);
+            //     d["35,000-49,999"] = parseFloat(d["percent of households with income 35,000-49,999"]);
+            //     d["50,000-74,999"] = parseFloat(d["percent of households with income 50,000-74,999"]);
+            //     d["75,000-99,999"] = parseFloat(d["percent of households with income 75,000-99,999"]);
+            //     d["100,000-149,999"] = parseFloat(d["percent of households with income 100,000-149,999"]);
+            //     d["150,000-199,999"] = parseFloat(d["percent of households with income 150,000-199,999"]);
+            //     d["200,000+"] = parseFloat(d["percent of households with income 200,000+"]);
+        // debugger;
+        let maxX = d3.max(data, function (d)  { return d[6]["category"]});             
+        
+        let minX = d3.max(data, function (d) { return d[0]["category"]});
                 xScale.domain([0, maxX]);
                 let yAxisGroup = svg2.append("g")
                 .attr("class", "yaxis")
                  .call(yAxis)
      
-                 
                  let xAxisGroup = svg2.append("g")
                      .attr("class", "xaxis")
                      .call(xAxis)
-     
-                let categoryGroup = svg.selectAll(".g-category-group")
+        
+                let categoryGroup = svg2.selectAll(".g-category-group")
                     .data(data)
                     .enter()
                     .append("g")
                     .attr("class", "g-category-group")
                     .attr("transform", function (d) {
                         // debugger;
-                        return "translate(0," + 10 + ")";
+                        return "translate(0," + y0(d.category)+ ")";
                     });
 
                 let bars2 = categoryGroup.append("rect")
-                    .attr("width", function (d) { return xScale(d["200,000+"]); })
+                    .attr("width", function (d) { return xScale(d["percent of households with income 200,000+"]); })
                     .attr("height", barHeight - 1)
                     .attr("class", "g-num2")
                     .attr("transform", "translate(0,4)");
-
+                  
                 var bars = categoryGroup.append("rect")
-                    .attr("width", function (d) { return xScale(d["10,000-14,999"]); })
+                    .attr("width", function (d) { return xScale(d["percent of households with income 10,000-14,999"]); })
                     .attr("height", barHeight - 1)
                     .attr("class", "g-num")
                     .attr("transform", "translate(0,4)"); 
 
-                let labelGroup = svg.selectAll("g-num")
+                let labelGroup = svg2.selectAll("g-num")
                     .data(data)
                     .enter()
                     .append("g")
@@ -257,13 +257,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 let barLabels = labelGroup.append("text")
-                    .text(function (d) { return d["10,000-14,999"]+ "%"; })
+                    .text(function (d) { return d["state"]+ "%"; })
                     .attr("x", function (d) {
                         if (minX > 32) {
-                            return xScale(d["75, 000 - 99, 999"]) - 37;
+                            return xScale(d["75,000-99,999"]) - 37;
                         }
                         else {
-                            return xScale(d["percent of households with income 200,000+"]) + 6;
+                            return xScale(d["15,000-24,999"]) + 6;
                         }
                     })
                     .style("fill", function (d) {
@@ -276,9 +276,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     })
                     .attr("y",  4/ 1.6)
                     .attr("class", "g-labels");   
-            });
+            ;
                 
-                    
+               
         });
 
        
@@ -287,6 +287,7 @@ let svg = d3.select("svg");
 
 
 let path = d3.geoPath();
+
 
 
 d3.json("https://d3js.org/us-10m.v1.json").then( (us) =>  {
