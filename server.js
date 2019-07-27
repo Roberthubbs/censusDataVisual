@@ -2,7 +2,7 @@
 const express = require("express");
 const app = express();
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + "/dist"));
 // app.use("/assets/data", express.static(__dirname + '/assets/data'));
 
 app.get("/", function (req, res) {
