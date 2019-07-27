@@ -2,7 +2,14 @@ import * as d3 from "d3";
 import * as topojson from "topojson";
 
 
+ 
+let state;
+
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
+    
     
 
 
@@ -83,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
             })
        
-    
+        // x1.domain(ageNames).rangeRound([0, x0.bandwidth()]);
         y.domain([0, d3.max(data1, function (d) { return d3.max(d.ages, function (d) { return d.value; }); })]);
 
         svg.append("g")
@@ -677,7 +684,7 @@ let path = d3.geoPath();
 d3.json("https://d3js.org/us-10m.v1.json").then( (us) =>  {
    
    
-    
+    // if (error) throw error;
 
     svg.append("g")
         .attr("class", "states")
