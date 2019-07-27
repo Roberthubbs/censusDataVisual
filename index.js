@@ -1,77 +1,18 @@
 import * as d3 from "d3";
 import * as topojson from "topojson";
 
-    // let svg = d3.select("svg");
+
     let myInfor;
     let incomeInformation = [];
     let povertyInformation = [];
     
     let houseHoldInfo = [];
-    const myDataMaster = d3.json("https://api.census.gov/data/2017/acs/acs1/profile?get=NAME,DP02_0001E,DP02_0003E,DP02_0004PE,DP02_0024PE,DP02_0029PE,DP02_0030PE,DP02_0035PE,DP02_0051PE,DP02_0052PE,DP02_0057PE,DP02_0059PE,DP02_0060PE,DP02_0061PE,DP02_0064PE,DP02_0088PE,DP02_0150PE,DP03_0001PE,DP03_0006PE,DP03_0009PE,DP03_0010PE,DP03_0053PE,DP03_0054PE,DP03_0055PE,DP03_0056PE,DP03_0057PE,DP03_0058PE,DP03_0059PE,DP03_0060PE,DP03_0061PE,DP03_0068PE,DP03_0074PE,DP03_0096PE,DP03_0119PE&for=state:*&key=91b7e9890ac26943434a33aa3c5d28d240cff015")
-        .then((data) => {
-            for (let i = 0; i < data.length; i++){
-               ////////// newly added 
-                state = data[i][0]
-                data[i] = {[state]:{
-                    "state": data[i][0],
-                    "total households": data[i][1],
-                    "households with children under 18":data[i][2],
-                    "percent of married households": data[i][3],
-                    "percentage of male marital status (fifteen and over)":data[i][4],
-                    "percentage of divorced males (fifteen and over)":data[i][5],
-                    "percentage of married females (fifteen +)":data[i][6],
-                    "percentage of divorced females (fifteen +)":data[i][7],
-                    "percentage of grandparents responsible for their grandchildren(married)":data[i][8],
-                    "percentage of 3 year olds and up enrolled in school":data[i][9],
-                    "percentage enrolled in college or grad school":data[i][10],
-                    "percentage of 25+ with less than ninth grade education": data[i][11],
-                    "percentage of 25+ with ninth-twelth grade education but no diploma": data[i][12],
-                    "percentage of 25+ with high school diploma": data[i][13],
-                    "percentage with bachelor's degree": data[i][14],
-               
-                    "population born in the US": data[i][15],
-                    "percentage of households with regular computer and internet use": data[i][16],
-                    "percentage of employment status (16+)": data[i][17],
-                    "percentage in armed forces (16+)": data[i][18],
-                    "16+ unemployment rate": data[i][19],
-                    "female employment status": data[i][20],
-                    "percent of households with income 10,000-14,999": data[i][21],
-                    "percent of households with income 15,000-24,999": data[i][22],
-                    "percent of households with income 25,000-34,999": data[i][23],
-                    "percent of households with income 35,000-49,999": data[i][24],
-                    "percent of households with income 50,000-74,999": data[i][25],
-                    "percent of households with income 75,000-99,999": data[i][26],
-                    "percent of households with income 100,000-149,999": data[i][27],
-                    "percent of households with income 150,000-199,999": data[i][28],
-                    "percent of households with income 200,000+": data[i][29],
-                    "percentage with retirement income": data[i][30],
-                    "percentage with foodstamp/SNAP benefits": data[i][31],
-                    "civilian noninstitutionalized population with health insurance": data[i][32],
-                    "percentage below the poverty-level": data[i][33],
-                    }
-                };
-            }
-            // console.log(incomeInformation)
-    })
+    
 let myKeys;
 let myVals;
 let string;
 let state;
 
-//   console.log(myInfor)  
-//DP03_0053PE,DP03_0054PE,DP03_0055PE,DP03_0056PE,DP03_0057PE,DP03_0058PE,DP03_0059PE,DP03_0060PE,DP03_0061PE
-
-
-
-// DP02_0001E,DP02_0003E,DP02_0004PE,DP02_0024PE,DP02_0029PE,DP02_0030PE,DP02_0035PE,DP02_0051PE
-//DP02_0001E == total households by state
-// DP02_0003E == total households with children under 18
-// DP02_0004PE == percent of married households
-// DP02_0024PE == percentage of male marital status (fifteen and over)
-// DP02_0029PE == percentage of divorced males (fifteen and over)
-// DP02_0030PE == percentage of married females (fifteen +)
-// DP02_0035PE == percentage of divorced females (fifteen +)
-// DP02_0051PE
 const houseHoldInfoMaster = d3.json("https://api.census.gov/data/2017/acs/acs1/profile?get=NAME,DP02_0001E,DP02_0003E,DP02_0004PE,DP02_0024PE,DP02_0029PE,DP02_0030PE,DP02_0035PE,DP02_0051PE&for=state:*&key=91b7e9890ac26943434a33aa3c5d28d240cff015")
     .then((data) => {
         for (let i = 0; i < data.length; i++){
@@ -90,14 +31,14 @@ const houseHoldInfoMaster = d3.json("https://api.census.gov/data/2017/acs/acs1/p
         }
         return data;
     });
-
+{//
 // DP02_0052PE == percentage of 3 year olds and up enrolled in school 
 // DP02_0057PE == percentage enrolled in college or grad school
 // DP02_0059PE	== percentage of 25+ with less than ninth grade education
 // DP02_0060PE == percentage of 25+ with ninth-twelth grade education but no diploma
 // DP02_0061PE	== percentage of 25+ with high school diploma
 // DP02_0064PE == percentage with bachelor's degree 
-
+}//
 
 
     let maritalInformation = [];
@@ -111,7 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const educationInfoMaster = d3.json("https://api.census.gov/data/2017/acs/acs1/profile?get=NAME,DP02_0052PE,DP02_0057PE,DP02_0059PE,DP02_0060PE,DP02_0061PE,DP02_0064PE&for=state:*&key=91b7e9890ac26943434a33aa3c5d28d240cff015")
-        .then((data) => {
+        .then((data, error) => {
+            if (error) throw error
             for (let i = 0; i < data.length; i++) {
                 state = data[i][0]
 
@@ -132,158 +74,717 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
     
-    let margin = { top: 10, right: 50, bottom: 20, left: 227 };
+    // let margin = { top: 10, right: 0, bottom: 20, left: 50 };
 
-    let widther = window.outerWidth;
+    // let widther = window.outerWidth;
 
-    let width = widther - margin.left - margin.right,
-        height = 200 - margin.top - margin.bottom;
+    // let width = widther - margin.left - margin.right,
+    //     height = 700 - margin.top - margin.bottom;
 
-    let barHeight = 35;
+    // let barHeight = 35;
 
     //Appends the svg to the chart-container div
-    let svg2 = d3.select("#all-state-information").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    // let svg2 = d3.select("#all-state-information").append("svg")
+    //     .attr("width", width + margin.left + margin.right)
+    //     .attr("height", height + margin.top + margin.bottom)
+    //     .append("g"),
+    //     g = svg2.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     //Creates the xScale 
-    let xScale = d3.scaleLinear()
-        .range([0, width]);
+    // let x0 = d3.scaleBand()
+    //     .rangeRound([0, width])
+        
 
-    let range = ([height, 0], 0)
-    let domain = (["percent of households with income 10,000-14,999",
-        "percent of households with income 15,000-24,999",
-        "percent of households with income 25,000-34,999",
-        "percent of households with income 35,000-49,999",
-        "percent of households with income 50,000-74,999",
-        "percent of households with income 75,000-99,999",
-        "percent of households with income 100,000-149,999",
-        "percent of households with income 150,000-199,999",
-        "percent of households with income 200,000+"])
+        
+
+    // let x1 = d3.scaleBand()
+    //     .padding(0.1);
+
+
+    // let range = ([height, 0], 0)
+    {
+    // let domain = (["percent of households with income 10,000-14,999",
+    //     "percent of households with income 15,000-24,999",
+    //     "percent of households with income 25,000-34,999",
+    //     "percent of households with income 35,000-49,999",
+    //     "percent of households with income 50,000-74,999",
+    //     "percent of households with income 75,000-99,999",
+    //     "percent of households with income 100,000-149,999",
+    //     "percent of households with income 150,000-199,999",
+    //     "percent of households with income 200,000+"])
     //Creates the yScale
-    let y0 = d3.scaleOrdinal()
-        .domain([0,10])
-        .range(range)
-        
+    // let y0 = d3.scaleOrdinal()
+    //     .domain([0,10])
+    //     .range(range)
+    }
+    // let y = d3.scaleLinear()
+    //     .rangeRound([(height / 1.75), 0]);  
 
-    //Defines the y axis styles
-    let yAxis = d3.axisLeft(y0)
-        
+    // let z = d3.scaleOrdinal()
+    //     .range(["#37A3D6", "#FF9400", "#ff0000"]);
 
+    let cutOffValue = 25;
     //Defines the y axis styles
-    let xAxis = d3.axisBottom(xScale)
-        .tickFormat(function (d) { return d + "%"; })
-        .tickSize(height); 
-    
     const incomeInfoMaster = d3.json("https://api.census.gov/data/2017/acs/acs1/profile?get=NAME,DP03_0053PE,DP03_0054PE,DP03_0055PE,DP03_0056PE,DP03_0057PE,DP03_0058PE,DP03_0059PE,DP03_0060PE,DP03_0061PE&for=state:*&key=91b7e9890ac26943434a33aa3c5d28d240cff015")
     .then((data) => {
         for (let i = 1; i < data.length; i++) {
             state = data[i][0]
-            data[i] = [
-                    {"category":"state", "information": state},
-                    {"category":"percent of households with income 10,000-14,999", "information":data[i][1]},
-                    {"category":"percent of households with income 15,000-24,999", "information":data[i][2]},
-                    {"category":"percent of households with income 25,000-34,999", "information":data[i][3]},
-                    {"category":"percent of households with income 35,000-49,999", "information":data[i][4]},
-                    {"category":"percent of households with income 50,000-74,999", "information":data[i][5]},
-                    {"category":"percent of households with income 75,000-99,999", "information":data[i][6]},
-                    {"category":"percent of households with income 100,000-149,999", "information":data[i][7]},
-                    {"category":"percent of households with income 150,000-199,999", "information":data[i][8]},
-                    {"category":"percent of households with income 200,000+", "information":data[i][9]},
-            ]
-            // debugger;
+          
+            data[i] = {
+                
+                "Groups": state,
+                
+                    "percent of households with income 10,000-14,999": data[i][1],
+                    "percent of households with income 15,000-24,999": data[i][2],
+                    "percent of households with income 25,000-34,999": data[i][3],
+                    "percent of households with income 35,000-49,999": data[i][4],
+                    "percent of households with income 50,000-74,999": data[i][5],
+                    "percent of households with income 75,000-99,999": data[i][6],
+                    "percent of households with income 100,000-149,999": data[i][7],
+                    "percent of households with income 150,000-199,999": data[i][8],
+                    "percent of households with income 200,000+": data[i][9],
+                
+            }
         }
+        
         return data;
     }).then((data) => {
         
+        
+        let data1 = data.slice(1,9);
+
+        let margin = { top: 20, right: 20, bottom: 30, left: 40 },
+            width = 960 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
+
+        let categoriesNames = data1.map(function (d) { return d.Groups; });
+        let ageNames = d3.keys(data1[0]).filter(function (d) { if (d !== "Groups") return d });
+        let x0 = d3.scaleBand()
+            .domain(categoriesNames)
+            .rangeRound([0, width], .1);
+
+        let x1 = d3.scaleOrdinal()
+            .domain(ageNames)
             
-            data = data.slice(1)
-           
-            // data.forEach((d) => {
-            //     d["state"] = d["state"];
-            //     d["10,000-14,999"] = parseFloat(d["percent of households with income 10,000-14,999"]);
-            //     d["15,000-24,999"] = parseFloat(d["percent of households with income 15,000-24,999"]);
-            //     d["25,000-34,999"] = parseFloat(d["percent of households with income 25,000-34,999"]);
-            //     d["35,000-49,999"] = parseFloat(d["percent of households with income 35,000-49,999"]);
-            //     d["50,000-74,999"] = parseFloat(d["percent of households with income 50,000-74,999"]);
-            //     d["75,000-99,999"] = parseFloat(d["percent of households with income 75,000-99,999"]);
-            //     d["100,000-149,999"] = parseFloat(d["percent of households with income 100,000-149,999"]);
-            //     d["150,000-199,999"] = parseFloat(d["percent of households with income 150,000-199,999"]);
-            //     d["200,000+"] = parseFloat(d["percent of households with income 200,000+"]);
-        // debugger;
-        let maxX = d3.max(data, function (d)  { return d[6]["category"]});             
+
+        let y = d3.scaleLinear()
+            .range([height, 0]);
+
+        let color = d3.scaleOrdinal()
+            .range(["#C4F0FF", "#E8D1FF", "#FFC4C4", "#F6FFC4", "#4d4dff", "#ff4dd2", "#ffff4d", "#4dff4d","#0099e6"]);
+
+        let xAxis = d3.axisBottom(x0)
+            
+
+        let yAxis = d3.axisLeft(y)
+            .tickFormat(d3.format(".2s"));
+
+            
+            
         
-        let minX = d3.max(data, function (d) { return d[0]["category"]});
-                xScale.domain([0, maxX]);
-                let yAxisGroup = svg2.append("g")
-                .attr("class", "yaxis")
-                 .call(yAxis)
-     
-                 let xAxisGroup = svg2.append("g")
-                     .attr("class", "xaxis")
-                     .call(xAxis)
-        
-                let categoryGroup = svg2.selectAll(".g-category-group")
-                    .data(data)
-                    .enter()
-                    .append("g")
-                    .attr("class", "g-category-group")
-                    .attr("transform", function (d) {
-                        // debugger;
-                        return "translate(0," + y0(d.category)+ ")";
-                    });
+        let svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .attr("class", "bar-chart")
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-                let bars2 = categoryGroup.append("rect")
-                    .attr("width", function (d) { return xScale(d["percent of households with income 200,000+"]); })
-                    .attr("height", barHeight - 1)
-                    .attr("class", "g-num2")
-                    .attr("transform", "translate(0,4)");
-                  
-                var bars = categoryGroup.append("rect")
-                    .attr("width", function (d) { return xScale(d["percent of households with income 10,000-14,999"]); })
-                    .attr("height", barHeight - 1)
-                    .attr("class", "g-num")
-                    .attr("transform", "translate(0,4)"); 
-
-                let labelGroup = svg2.selectAll("g-num")
-                    .data(data)
-                    .enter()
-                    .append("g")
-                    .attr("class", "g-label-group")
-                    .attr("transform", function (d) {
-                        return "translate(0," + y0(d["State"]) + ")";
-                    });
-
-                let barLabels = labelGroup.append("text")
-                    .text(function (d) { return d["state"]+ "%"; })
-                    .attr("x", function (d) {
-                        if (minX > 32) {
-                            return xScale(d["75,000-99,999"]) - 37;
-                        }
-                        else {
-                            return xScale(d["15,000-24,999"]) + 6;
-                        }
-                    })
-                    .style("fill", function (d) {
-                        if (minX > 32) {
-                            return "white";
-                        }
-                        else {
-                            return "#696969";
-                        }
-                    })
-                    .attr("y",  4/ 1.6)
-                    .attr("class", "g-labels");   
-            ;
+            
+            data1.forEach(function (d) {
                 
+                d.ages = ageNames.map(function (name) { return  { name: name, value: +d[name] }; });
+            });
+            data1.forEach(function (d) {
+
+                d.ages = d.ages.sort((a, b) => (a.value > b.value) ? -1 : 1);
+                
+            })
+       
+        // x1.domain(ageNames).rangeRound([0, x0.bandwidth()]);
+        y.domain([0, d3.max(data1, function (d) { return d3.max(d.ages, function (d) { return d.value; }); })]);
+
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("Population");
+
+        let state = svg.selectAll(".groups")
+            .data(data1)
+            .enter().append("g")
+            .attr("class", "groups")
+            .attr("transform", function (d) {  return "translate(" + x0(d.Groups) + ",0)"; });
+
+        state.selectAll("rect")
+            .data(function (d) { return d.ages; })
+            .enter().append("rect")
+            .attr("width", x0.bandwidth())
+            .attr("x", function (d) { return x1(d.name); })
+            .attr("y", function (d) { return y(d.value); })
+            .attr("height", function (d) { return height - y(d.value); })
+            .style("fill", function (d) { return color(d.name); })
+            
+            // .style("border-right", 2)
+
+        let legend = svg.selectAll(".legend")
+            .data(ageNames.slice().reverse())
+            .enter().append("g")
+            .attr("class", "legend")
+            .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; })
+            
+            
+
+        legend.append("rect")
+            .attr("x", width - 18)
+            .attr("width", 18)
+            .attr("height", 18)
+            .style("fill", color);
+
+        legend.append("text")
+            .attr("x", width - 24)
+            .attr("y", 9)
+            .attr("dy", ".35em")
+            .style("text-anchor", "end")
+            .text(function (d) { return d; });
+        
+        
+                
+        return data;
+        }).then((data) => {
+            let data2 = data.slice(9,18);
+            let margin = { top: 20, right: 20, bottom: 30, left: 40 },
+                width = 960 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            let categoriesNames = data2.map(function (d) { return d.Groups; });
+            let ageNames = d3.keys(data2[0]).filter(function (d) { if (d !== "Groups") return d });
+            let x0 = d3.scaleBand()
+                .domain(categoriesNames)
+                .rangeRound([0, width], .1);
+
+            let x1 = d3.scaleOrdinal()
+                .domain(ageNames)
+
+
+            let y = d3.scaleLinear()
+                .range([height, 0]);
+
+            let color = d3.scaleOrdinal()
+                .range(["#C4F0FF", "#E8D1FF", "#FFC4C4", "#F6FFC4", "#4d4dff", "#ff4dd2", "#ffff4d", "#4dff4d", "#0099e6"]);
+
+            let xAxis = d3.axisBottom(x0)
+
+
+            let yAxis = d3.axisLeft(y)
+                .tickFormat(d3.format(".2s"));
+
+
+            let svg = d3.select("body").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .attr("class", "bar-chart")
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+            data2.forEach(function (d) {
+
+                d.ages = ageNames.map(function (name) { return { name: name, value: +d[name] }; });
+            });
+            data2.forEach(function (d) {
+
+                d.ages = d.ages.sort((a, b) => (a.value > b.value) ? -1 : 1);
+                
+            })
+
+            // x1.domain(ageNames).rangeRound([0, x0.bandwidth()]);
+            y.domain([0, d3.max(data2, function (d) { return d3.max(d.ages, function (d) { return d.value; }); })]);
+
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis)
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", ".71em")
+                .style("text-anchor", "end")
+                .text("Population");
+
+            let state = svg.selectAll(".groups")
+                .data(data2)
+                .enter().append("g")
+                .attr("class", "groups")
+                .attr("transform", function (d) { return "translate(" + x0(d.Groups) + ",0)"; });
+
+            state.selectAll("rect")
+                .data(function (d) { return d.ages; })
+                .enter().append("rect")
+                .attr("width", x0.bandwidth())
+                .attr("x", function (d) { return x1(d.name); })
+                .attr("y", function (d) { return y(d.value); })
+                .attr("height", function (d) { return height - y(d.value); })
+                .style("fill", function (d) { return color(d.name); })
+
+            // .style("border-right", 2)
+
+            let legend = svg.selectAll(".legend")
+                .data(ageNames.slice().reverse())
+                .enter().append("g")
+                .attr("class", "legend")
+                .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; })
+
+
+
+            legend.append("rect")
+                .attr("x", width - 18)
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", color);
+
+            legend.append("text")
+                .attr("x", width - 24)
+                .attr("y", 9)
+                .attr("dy", ".35em")
+                .style("text-anchor", "end")
+                .text(function (d) { return d; });
+
+            return data;
+        }).then((data) => {
+            let data3 = data.slice(18, 27);
+            let margin = { top: 20, right: 20, bottom: 30, left: 40 },
+                width = 960 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            let categoriesNames = data3.map(function (d) { return d.Groups; });
+            let ageNames = d3.keys(data3[0]).filter(function (d) { if (d !== "Groups") return d });
+            let x0 = d3.scaleBand()
+                .domain(categoriesNames)
+                .rangeRound([0, width], .1);
+
+            let x1 = d3.scaleOrdinal()
+                .domain(ageNames)
+
+
+            let y = d3.scaleLinear()
+                .range([height, 0]);
+
+            let color = d3.scaleOrdinal()
+                .range(["#C4F0FF", "#E8D1FF", "#FFC4C4", "#F6FFC4", "#4d4dff", "#ff4dd2", "#ffff4d", "#4dff4d", "#0099e6"]);
+
+            let xAxis = d3.axisBottom(x0)
+
+
+            let yAxis = d3.axisLeft(y)
+                .tickFormat(d3.format(".2s"));
+
+
+            let svg = d3.select("body").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .attr("class", "bar-chart")
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+            data3.forEach(function (d) {
+
+                d.ages = ageNames.map(function (name) { return { name: name, value: +d[name] }; });
+            });
+            data3.forEach(function (d) {
+
+                d.ages = d.ages.sort((a, b) => (a.value > b.value) ? -1 : 1);
                
-        });
+            })
+
+            // x1.domain(ageNames).rangeRound([0, x0.bandwidth()]);
+            y.domain([0, d3.max(data3, function (d) { return d3.max(d.ages, function (d) { return d.value; }); })]);
+
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis)
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", ".71em")
+                .style("text-anchor", "end")
+                .text("Population");
+
+            let state = svg.selectAll(".groups")
+                .data(data3)
+                .enter().append("g")
+                .attr("class", "groups")
+                .attr("transform", function (d) { return "translate(" + x0(d.Groups) + ",0)"; });
+
+            state.selectAll("rect")
+                .data(function (d) { return d.ages; })
+                .enter().append("rect")
+                .attr("width", x0.bandwidth())
+                .attr("x", function (d) { return x1(d.name); })
+                .attr("y", function (d) { return y(d.value); })
+                .attr("height", function (d) { return height - y(d.value); })
+                .style("fill", function (d) { return color(d.name); })
+
+            // .style("border-right", 2)
+
+            let legend = svg.selectAll(".legend")
+                .data(ageNames.slice().reverse())
+                .enter().append("g")
+                .attr("class", "legend")
+                .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; })
+
+
+
+            legend.append("rect")
+                .attr("x", width - 18)
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", color);
+
+            legend.append("text")
+                .attr("x", width - 24)
+                .attr("y", 9)
+                .attr("dy", ".35em")
+                .style("text-anchor", "end")
+                .text(function (d) { return d; });
+
+            return data;
+        }).then((data) => {
+            let data4 = data.slice(27, 36);
+            let margin = { top: 20, right: 20, bottom: 30, left: 40 },
+                width = 960 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            let categoriesNames = data4.map(function (d) { return d.Groups; });
+            let ageNames = d3.keys(data4[0]).filter(function (d) { if (d !== "Groups") return d });
+            let x0 = d3.scaleBand()
+                .domain(categoriesNames)
+                .rangeRound([0, width], .1);
+
+            let x1 = d3.scaleOrdinal()
+                .domain(ageNames)
+
+
+            let y = d3.scaleLinear()
+                .range([height, 0]);
+
+            let color = d3.scaleOrdinal()
+                .range(["#C4F0FF", "#E8D1FF", "#FFC4C4", "#F6FFC4", "#4d4dff", "#ff4dd2", "#ffff4d", "#4dff4d", "#0099e6"]);
+
+            let xAxis = d3.axisBottom(x0)
+
+
+            let yAxis = d3.axisLeft(y)
+                .tickFormat(d3.format(".2s"));
+
+         
+            let svg = d3.select("body").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .attr("class", "bar-chart")
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+            data4.forEach(function (d) {
+
+                d.ages = ageNames.map(function (name) { return { name: name, value: +d[name] }; });
+            });
+            data4.forEach(function (d) {
+
+                d.ages = d.ages.sort((a, b) => (a.value > b.value) ? -1 : 1);
+                console.log(d.ages)
+            })
+
+            // x1.domain(ageNames).rangeRound([0, x0.bandwidth()]);
+            y.domain([0, d3.max(data4, function (d) { return d3.max(d.ages, function (d) { return d.value; }); })]);
+
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis)
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", ".71em")
+                .style("text-anchor", "end")
+                .text("Population");
+
+            let state = svg.selectAll(".groups")
+                .data(data4)
+                .enter().append("g")
+                .attr("class", "groups")
+                .attr("transform", function (d) { return "translate(" + x0(d.Groups) + ",0)"; });
+
+            state.selectAll("rect")
+                .data(function (d) { return d.ages; })
+                .enter().append("rect")
+                .attr("width", x0.bandwidth())
+                .attr("x", function (d) { return x1(d.name); })
+                .attr("y", function (d) { return y(d.value); })
+                .attr("height", function (d) { return height - y(d.value); })
+                .style("fill", function (d) { return color(d.name); })
+
+            // .style("border-right", 2)
+
+            let legend = svg.selectAll(".legend")
+                .data(ageNames.slice().reverse())
+                .enter().append("g")
+                .attr("class", "legend")
+                .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; })
+
+
+
+            legend.append("rect")
+                .attr("x", width - 18)
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", color);
+
+            legend.append("text")
+                .attr("x", width - 24)
+                .attr("y", 9)
+                .attr("dy", ".35em")
+                .style("text-anchor", "end")
+                .text(function (d) { return d; });
+
+            return data;
+        }).then((data) => {
+            let data5 = data.slice(36, 45);
+            let margin = { top: 20, right: 20, bottom: 30, left: 40 },
+                width = 960 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            let categoriesNames = data5.map(function (d) { return d.Groups; });
+            let ageNames = d3.keys(data5[0]).filter(function (d) { if (d !== "Groups") return d });
+            let x0 = d3.scaleBand()
+                .domain(categoriesNames)
+                .rangeRound([0, width], .1);
+
+            let x1 = d3.scaleOrdinal()
+                .domain(ageNames)
+
+
+            let y = d3.scaleLinear()
+                .range([height, 0]);
+
+            let color = d3.scaleOrdinal()
+                .range(["#C4F0FF", "#E8D1FF", "#FFC4C4", "#F6FFC4", "#4d4dff", "#ff4dd2", "#ffff4d", "#4dff4d", "#0099e6"]);
+
+            let xAxis = d3.axisBottom(x0)
+
+
+            let yAxis = d3.axisLeft(y)
+                .tickFormat(d3.format(".2s"));
+
+
+            let svg = d3.select("body").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .attr("class", "bar-chart")
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+            data5.forEach(function (d) {
+
+                d.ages = ageNames.map(function (name) { return { name: name, value: +d[name] }; });
+            });
+            data5.forEach(function (d) {
+
+                d.ages = d.ages.sort((a, b) => (a.value > b.value) ? -1 : 1);
+                console.log(d.ages)
+            })
+
+            // x1.domain(ageNames).rangeRound([0, x0.bandwidth()]);
+            y.domain([0, d3.max(data5, function (d) { return d3.max(d.ages, function (d) { return d.value; }); })]);
+
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis)
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", ".71em")
+                .style("text-anchor", "end")
+                .text("Population");
+
+            let state = svg.selectAll(".groups")
+                .data(data5)
+                .enter().append("g")
+                .attr("class", "groups")
+                .attr("transform", function (d) { return "translate(" + x0(d.Groups) + ",0)"; });
+
+            state.selectAll("rect")
+                .data(function (d) { return d.ages; })
+                .enter().append("rect")
+                .attr("width", x0.bandwidth())
+                .attr("x", function (d) { return x1(d.name); })
+                .attr("y", function (d) { return y(d.value); })
+                .attr("height", function (d) { return height - y(d.value); })
+                .style("fill", function (d) { return color(d.name); })
+
+            // .style("border-right", 2)
+
+            let legend = svg.selectAll(".legend")
+                .data(ageNames.slice().reverse())
+                .enter().append("g")
+                .attr("class", "legend")
+                .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; })
+
+
+
+            legend.append("rect")
+                .attr("x", width - 18)
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", color);
+
+            legend.append("text")
+                .attr("x", width - 24)
+                .attr("y", 9)
+                .attr("dy", ".35em")
+                .style("text-anchor", "end")
+                .text(function (d) { return d; });
+
+            return data;
+        }).then((data) => {
+            let data6 = data.slice(45);
+            let margin = { top: 20, right: 20, bottom: 30, left: 40 },
+                width = 960 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            let categoriesNames = data6.map(function (d) { return d.Groups; });
+            let ageNames = d3.keys(data6[0]).filter(function (d) { if (d !== "Groups") return d });
+            let x0 = d3.scaleBand()
+                .domain(categoriesNames)
+                .rangeRound([0, width], .1);
+
+            let x1 = d3.scaleOrdinal()
+                .domain(ageNames)
+
+
+            let y = d3.scaleLinear()
+                .range([height, 0]);
+
+            let color = d3.scaleOrdinal()
+                .range(["#C4F0FF", "#E8D1FF", "#FFC4C4", "#F6FFC4", "#4d4dff", "#ff4dd2", "#ffff4d", "#4dff4d", "#0099e6"]);
+
+            let xAxis = d3.axisBottom(x0)
+
+
+            let yAxis = d3.axisLeft(y)
+                .tickFormat(d3.format(".2s"));
+
+
+            let svg = d3.select("body").append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .attr("class", "bar-chart")
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+
+            data6.forEach(function (d) {
+
+                d.ages = ageNames.map(function (name) { return { name: name, value: +d[name] }; });
+            });
+            data6.forEach(function (d) {
+
+                d.ages = d.ages.sort((a, b) => (a.value > b.value) ? -1 : 1);
+                console.log(d.ages)
+            })
+
+            // x1.domain(ageNames).rangeRound([0, x0.bandwidth()]);
+            y.domain([0, d3.max(data6, function (d) { return d3.max(d.ages, function (d) { return d.value; }); })]);
+
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis)
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", ".71em")
+                .style("text-anchor", "end")
+                .text("Population");
+
+            let state = svg.selectAll(".groups")
+                .data(data6)
+                .enter().append("g")
+                .attr("class", "groups")
+                .attr("transform", function (d) { return "translate(" + x0(d.Groups) + ",0)"; });
+
+            state.selectAll("rect")
+                .data(function (d) { return d.ages; })
+                .enter().append("rect")
+                .attr("width", x0.bandwidth())
+                .attr("x", function (d) { return x1(d.name); })
+                .attr("y", function (d) { return y(d.value); })
+                .attr("height", function (d) { return height - y(d.value); })
+                .style("fill", function (d) { return color(d.name); })
+
+            // .style("border-right", 2)
+
+            let legend = svg.selectAll(".legend")
+                .data(ageNames.slice().reverse())
+                .enter().append("g")
+                .attr("class", "legend")
+                .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; })
+
+
+
+            legend.append("rect")
+                .attr("x", width - 18)
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", color);
+
+            legend.append("text")
+                .attr("x", width - 24)
+                .attr("y", 9)
+                .attr("dy", ".35em")
+                .style("text-anchor", "end")
+                .text(function (d) { return d; });
+
+            return data;
+        })
 
        
    
-let svg = d3.select("svg");
+let svg = d3.select("svg")
+        
 
 
 let path = d3.geoPath();
@@ -306,55 +807,10 @@ d3.json("https://d3js.org/us-10m.v1.json").then( (us) =>  {
         .attr("class", "state-borders")
         .attr("d", path(topojson.mesh(us, us.objects.states, function (a, b) { return a !== b; })));
 
-
-
-
-
-
-
-   
-    
-    
 });
 
    
 
-    // svg.selectAll("path")
-    //     .data(path)
-    //     .enter()
-    //     .append("path")
-    // const margin = 60;
-    // const width = 1000 - 2 * margin
-    // const height = 600 - 2 * margin;
-    // const svg = d3.select('body').append('svg');
-    // const chart = svg.append('g')
-    //     .attr('transform', `translate(${margin}, ${margin})`);
-
-    // const yScale = d3.scaleLinear()
-    //     .range ([height, 0])
-    //     .domain([0,100]);
-
-    // chart.append('g')
-    //     .call(d3.axisLeft(yScale));
-
-    // const xScale = d3.scaleBand()
-    //     .range([0, width])
-    //     .domain(sample.map((s) => s.language))
-    //     .padding(0.2)
-
-    // chart.append('g')
-    //     .attr('transform', `translate(0, ${height})`)
-    //     .call(d3.axisBottom(xScale));
-
-    // chart.selectAll()
-    //     .data(goals)
-    //     .enter()
-    //     .append('rect')
-    //     .attr('x',(s) => xScale(s.language))
-    //     .attr('y', (s) => yScale(s.value))
-    //     .attr('height',(s) => height - yScale(s.value))
-    //     .attr('width', xScale.bandwidth())
-    //     .attr('x', (actual, index, array) =>
-    //     xScale(actual.value))
 
 });
+
