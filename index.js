@@ -2,75 +2,8 @@ import * as d3 from "d3";
 import * as topojson from "topojson";
 
 
-    let myInfor;
-    let incomeInformation = [];
-    let povertyInformation = [];
-    
-    let houseHoldInfo = [];
-    
-let myKeys;
-let myVals;
-let string;
-let state;
-
-const houseHoldInfoMaster = d3.json("https://api.census.gov/data/2017/acs/acs1/profile?get=NAME,DP02_0001E,DP02_0003E,DP02_0004PE,DP02_0024PE,DP02_0029PE,DP02_0030PE,DP02_0035PE,DP02_0051PE&for=state:*&key=91b7e9890ac26943434a33aa3c5d28d240cff015")
-    .then((data) => {
-        for (let i = 0; i < data.length; i++){
-            state = data[i][0]
-            data[i] = { [state]: {
-            "total households": data[i][1],
-            "total households with children under 18": data[i][2],
-            "percent of households with income 25,000-34,999": data[i][3],
-            "percent of married households": data[i][4],
-            "percentage of male marital status (fifteen and over)": data[i][5],
-            "percentage of divorced males (fifteen and over)": data[i][6],
-            "percentage of married females (fifteen +)": data[i][7],
-            "percentage of divorced females (fifteen +)": data[i][8],
-            "grandparents who are responsible for their own grandchildren": data[i][9],
-            }}
-        }
-        return data;
-    });
-{//
-// DP02_0052PE == percentage of 3 year olds and up enrolled in school 
-// DP02_0057PE == percentage enrolled in college or grad school
-// DP02_0059PE	== percentage of 25+ with less than ninth grade education
-// DP02_0060PE == percentage of 25+ with ninth-twelth grade education but no diploma
-// DP02_0061PE	== percentage of 25+ with high school diploma
-// DP02_0064PE == percentage with bachelor's degree 
-}//
-
-
-    let maritalInformation = [];
-    
-    let internetUse = [];
-let educationInformation = [];
-let percentageWithBachelorsDegree = [];
 document.addEventListener('DOMContentLoaded', () => {
     
-    
-
-
-    const educationInfoMaster = d3.json("https://api.census.gov/data/2017/acs/acs1/profile?get=NAME,DP02_0052PE,DP02_0057PE,DP02_0059PE,DP02_0060PE,DP02_0061PE,DP02_0064PE&for=state:*&key=91b7e9890ac26943434a33aa3c5d28d240cff015")
-        .then((data, error) => {
-            if (error) throw error
-            for (let i = 0; i < data.length; i++) {
-                state = data[i][0]
-
-                data[i] = {
-                    [state]: {
-                        "percentage of 3 year olds and up enrolled in school": data[i][1],
-                        "percentage enrolled in college or grad school": data[i][2],
-                        "percentage of 25+ with less than ninth grade education": data[i][3],
-                        "percentage of 25+ with ninth-twelth grade education but no diploma": data[i][4],
-                        "percentage of 25+ with high school diploma": data[i][5],
-                        "percentage with bachelor's degree ": data[i][6],
-                    }
-                }
-                educationInformation.push(data[i])
-            }
-            
-        })
 
 
     let cutOffValue = 25;
@@ -150,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
             })
        
-        // x1.domain(ageNames).rangeRound([0, x0.bandwidth()]);
+    
         y.domain([0, d3.max(data1, function (d) { return d3.max(d.ages, function (d) { return d.value; }); })]);
 
         svg.append("g")
@@ -744,7 +677,7 @@ let path = d3.geoPath();
 d3.json("https://d3js.org/us-10m.v1.json").then( (us) =>  {
    
    
-    // if (error) throw error;
+    
 
     svg.append("g")
         .attr("class", "states")
