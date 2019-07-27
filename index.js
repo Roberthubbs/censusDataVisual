@@ -72,56 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
         })
 
-    
-    
-    // let margin = { top: 10, right: 0, bottom: 20, left: 50 };
-
-    // let widther = window.outerWidth;
-
-    // let width = widther - margin.left - margin.right,
-    //     height = 700 - margin.top - margin.bottom;
-
-    // let barHeight = 35;
-
-    //Appends the svg to the chart-container div
-    // let svg2 = d3.select("#all-state-information").append("svg")
-    //     .attr("width", width + margin.left + margin.right)
-    //     .attr("height", height + margin.top + margin.bottom)
-    //     .append("g"),
-    //     g = svg2.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    //Creates the xScale 
-    // let x0 = d3.scaleBand()
-    //     .rangeRound([0, width])
-        
-
-        
-
-    // let x1 = d3.scaleBand()
-    //     .padding(0.1);
-
-
-    // let range = ([height, 0], 0)
-    {
-    // let domain = (["percent of households with income 10,000-14,999",
-    //     "percent of households with income 15,000-24,999",
-    //     "percent of households with income 25,000-34,999",
-    //     "percent of households with income 35,000-49,999",
-    //     "percent of households with income 50,000-74,999",
-    //     "percent of households with income 75,000-99,999",
-    //     "percent of households with income 100,000-149,999",
-    //     "percent of households with income 150,000-199,999",
-    //     "percent of households with income 200,000+"])
-    //Creates the yScale
-    // let y0 = d3.scaleOrdinal()
-    //     .domain([0,10])
-    //     .range(range)
-    }
-    // let y = d3.scaleLinear()
-    //     .rangeRound([(height / 1.75), 0]);  
-
-    // let z = d3.scaleOrdinal()
-    //     .range(["#37A3D6", "#FF9400", "#ff0000"]);
 
     let cutOffValue = 25;
     //Defines the y axis styles
