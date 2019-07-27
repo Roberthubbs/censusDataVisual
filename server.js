@@ -1,4 +1,4 @@
-
+const favicon = require("serve-favicon")
 const express = require("express");
 const app = express();
 
