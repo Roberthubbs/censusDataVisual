@@ -2,8 +2,10 @@
 const path = require('path');
 const express = require("express");
 const app = express();
-app.listen(process.env.PORT || 3000, function () {
-    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+const port = process.env.PORT || 8000;
+let server = require('http').Server(app);
+server.listen(port, () => {
+    console.log("App is running on port " + port);
 });
 
 app.use(express.static(__dirname + "/dist"));
