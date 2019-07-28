@@ -5,14 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack --watch --mode=development",
-    "server": "nodemon -w server.js server.js",
-    "start": "node server.js",
+    "start": "webpack --watch --mode=development",
+    "dev:server": "node server.js",
     "heroku-postbuild": "webpack -p"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-loader": "^8.0.6",
     "css-loader": "^3.1.0",
     "d3": "^5.9.7",
     "d3-geo": "^1.11.6",
