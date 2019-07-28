@@ -4,7 +4,6 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5001;
 
-// let _favicon = favicon(path.join(__dirname, 'public', 'favicon.ico'))
 app.use(express.static(__dirname + "/dist"));
 // app.use("/assets/data", express.static(__dirname + '/assets/data'));
 
