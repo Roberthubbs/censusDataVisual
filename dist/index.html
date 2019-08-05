@@ -8,11 +8,44 @@
     <meta Content-Security-Policy default="";>
     <script src="bundle.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    
+
     <link rel="stylesheet" href="style.css" />
     <title>Income Visualizer</title>
 </head>
 <body>
     <h1 class="title">Visualizing 2017 Country-Wide Income Information With d3</h1>
+    <svg width="960" height="600" id="statesvg" style="margin-left:200px;margin-right:auto"></svg>
+    <script src="cities.js"></script>
+    <script src="uStates.js"></script> <!-- creates uStates. -->
+    <script>
+        function tooltipHtml(n, d) { /* function to create html content string in tooltip div. */
+            return "<h4>" + n + "</h4><table>" +
+                "<tr><td>Low</td><td>" + (d.low) + "</td></tr>" +
+                "<tr><td>Average</td><td>" + (d.avg) + "</td></tr>" +
+                "<tr><td>High</td><td>" + (d.high) + "</td></tr>" +
+                "</table>";
+        }
+        var sampleData = {}; /* Sample random data. */
+        ["HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
+            "ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH",
+            "MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT",
+            "CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN",
+            "WI", "MO", "AR", "OK", "KS", "LS", "VA"]
+            .forEach(function (d) {
+                var low = Math.round(100 * Math.random()),
+                    mid = Math.round(100 * Math.random()),
+                    high = Math.round(100 * Math.random());
+                sampleData[d] = {
+                    low: d3.min([low, mid, high]),
+                    high: d3.max([low, mid, high]),
+                    avg: Math.round((low + mid + high) / 3),
+                    color: d3.interpolate("#ffffcc", "#800026")(low / 100)
+                };
+            });
+        /* draw states on id #statesvg */
+        uStates.draw("#statesvg", sampleData, tooltipHtml);
+    </script>
         <script>
          const incomeInfoMaster = d3.json("https://api.census.gov/data/2017/acs/acs1/profile?get=NAME,DP03_0053PE,DP03_0054PE,DP03_0055PE,DP03_0056PE,DP03_0057PE,DP03_0058PE,DP03_0059PE,DP03_0060PE,DP03_0061PE&for=state:*&key=91b7e9890ac26943434a33aa3c5d28d240cff015")
                 .then((data) => {
@@ -202,6 +235,7 @@
                  </div>
             
     </script>
+    
     <form>
         <!-- <label>Select States</label> -->
         <select id="mySelect">
@@ -216,9 +250,7 @@
         <button type="button"onClick="select();">Display</button>
         
     </form>
-        <svg style="display:flex;justify-content:center;margin-bottom:100px;margin-left:auto;margin-right:auto" width="960"
-            height="600"></svg>
-
+      
 </body>
 
 </html>

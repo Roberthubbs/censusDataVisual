@@ -12,11 +12,25 @@
   stroke-linecap: round;
   pointer-events: none;
 }
-.states-body{
-  display: flex;
-  justify-content: center;
-  margin-left: 200px;
+
+h1 {
+  font-family:arial;
+  font-size:2em;
+  color:#333;
 }
+#info {
+  position:absolute;
+  top: 10px;
+  left: 10px;
+}
+/* .states {
+	fill: #e5e5e5;
+	stroke: #fff;
+	stroke-width:2px;
+}
+.states:hover {
+	fill: steelblue;
+} */
 body {
   font: 10px sans-serif;
   background-color: darkblue;
