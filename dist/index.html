@@ -26,14 +26,14 @@
                 "<tr><td>High</td><td>" + (d.high) + "</td></tr>" +
                 "</table>";
         }
-        var sampleData = {}; /* Sample random data. */
+        let sampleData = {}; /* Sample random data. */
         ["HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
             "ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH",
             "MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT",
             "CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN",
             "WI", "MO", "AR", "OK", "KS", "LS", "VA"]
             .forEach(function (d) {
-                var low = Math.round(100 * Math.random()),
+                let low = Math.round(100 * Math.random()),
                     mid = Math.round(100 * Math.random()),
                     high = Math.round(100 * Math.random());
                 sampleData[d] = {
