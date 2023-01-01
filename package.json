@@ -15,8 +15,8 @@
   "dependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "babel-loader": "^8.0.6",
-    "css-loader": "^3.1.0",
+    "babel-loader": "^8.3.0",
+    "css-loader": "^6.7.3",
     "d3": "^5.9.7",
     "d3-geo": "^1.11.6",
     "d3-geo-projection": "^2.7.0",
@@ -24,8 +24,8 @@
     "nodemon": "^1.19.1",
     "serve-favicon": "^2.5.0",
     "topojson": "^3.0.2",
-    "webpack": "^4.36.1",
-    "webpack-cli": "^3.3.6"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   },
   "engines": {
     "node": "10.13.0",
